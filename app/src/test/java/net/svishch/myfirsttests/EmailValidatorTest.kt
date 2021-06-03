@@ -1,5 +1,6 @@
 package net.svishch.myfirsttests
 
+import org.junit.Assert
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -54,6 +55,37 @@ class EmailValidatorTest {
     @Test
     fun emailValidator_InvalidEmailDotAfterDomain_ReturnsFalse() {
         assertFalse(EmailValidator.isValidEmail("name@email.com."))
+    }
+
+    // a. assertEquals;
+    @Test
+    fun emailValidator_EqualsDomain_ReturnsDomain() {
+        Assert.assertEquals("email.com", EmailValidator.getDomainForEmail("name@email.com"))
+    }
+
+    //b. assertNotEquals;
+    @Test
+    fun emailValidator_ReturnsNotDomain() {
+        Assert.assertNotEquals("email.com", EmailValidator.getDomainForEmail("nameemail.com"))
+    }
+
+    //    c. assertArrayEquals;
+    @Test
+    fun emailValidator_ArrayEquals_ReturnsDomainArray() {
+        var arr: Array<String> = arrayOf("e", "m", "a", "i", "l", ".", "c", "o", "m")
+        Assert.assertArrayEquals(arr, EmailValidator.getArrDomainForEmail("name@email.com"))
+    }
+
+    //    d. assertNull;
+    @Test
+    fun emailValidator_ReturnsDomainNull() {
+        Assert.assertNull(EmailValidator.getDomainForEmail("nameemail.com"))
+    }
+
+    //    e. assertNotNull;
+    @Test
+    fun emailValidator_ReturnsDomainNotNull() {
+        Assert.assertNotNull(EmailValidator.getDomainForEmail("name@email.com"))
     }
 
 }
