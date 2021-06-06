@@ -35,5 +35,17 @@ class EmailValidator : TextWatcher {
         fun isValidEmail(email: CharSequence?): Boolean {
             return email != null && EMAIL_PATTERN.matcher(email).matches()
         }
+
+        fun getDomainForEmail(email: String): String? {
+            if (!isValidEmail(email)){
+                return  null
+            }
+            return email.substring(email.indexOf("@")+1)
+        }
+
+        fun  getArrDomainForEmail(email: String): Array<String> {
+            var domain = email.substring(email.indexOf("@")+1)
+            return Array(domain.length) { domain[it].toString() };
+        }
     }
 }
