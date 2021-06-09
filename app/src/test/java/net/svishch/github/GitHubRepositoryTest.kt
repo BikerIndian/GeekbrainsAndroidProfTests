@@ -1,4 +1,4 @@
-package net.svishch.myfirsttests
+package net.svishch.github
 
 
 import net.svishch.github.model.SearchResponse

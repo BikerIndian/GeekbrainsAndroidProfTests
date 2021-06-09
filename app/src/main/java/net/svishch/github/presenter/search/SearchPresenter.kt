@@ -4,7 +4,6 @@ package net.svishch.github.presenter.search
 import net.svishch.github.model.SearchResponse
 import net.svishch.github.repository.GitHubRepository
 import net.svishch.github.repository.GitHubRepository.GitHubRepositoryCallback
-import net.svishch.github.view.search.MainActivity
 import net.svishch.github.view.search.ViewSearchContract
 import retrofit2.Response
 
@@ -17,36 +16,44 @@ import retrofit2.Response
  */
 
 internal class SearchPresenter internal constructor(
-    private val viewContract: ViewSearchContract,
+    public var viewContract: ViewSearchContract?,
     private val repository: GitHubRepository
 ) : PresenterSearchContract, GitHubRepositoryCallback {
 
     override fun searchGitHub(searchQuery: String) {
-        viewContract.displayLoading(true)
+        viewContract?.displayLoading(true)
         repository.searchGithub(searchQuery, this)
     }
 
+    override fun onAttach() {
+
+    }
+
+    override fun onDetach() {
+        viewContract = null
+    }
+
     override fun handleGitHubResponse(response: Response<SearchResponse?>?) {
-        viewContract.displayLoading(false)
+        viewContract?.displayLoading(false)
         if (response != null && response.isSuccessful) {
             val searchResponse = response.body()
             val searchResults = searchResponse?.searchResults
             val totalCount = searchResponse?.totalCount
             if (searchResults != null && totalCount != null) {
-                viewContract.displaySearchResults(
+                viewContract?.displaySearchResults(
                     searchResults,
                     totalCount
                 )
             } else {
-                viewContract.displayError("Search results or total count are null")
+                viewContract?.displayError("Search results or total count are null")
             }
         } else {
-            viewContract.displayError("Response is null or unsuccessful")
+            viewContract?.displayError("Response is null or unsuccessful")
         }
     }
 
     override fun handleGitHubError() {
-        viewContract.displayLoading(false)
-        viewContract.displayError()
+        viewContract?.displayLoading(false)
+        viewContract?.displayError()
     }
 }

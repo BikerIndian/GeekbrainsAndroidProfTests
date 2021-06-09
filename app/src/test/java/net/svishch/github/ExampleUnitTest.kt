@@ -1,4 +1,4 @@
-package net.svishch.myfirsttests
+package net.svishch.github
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

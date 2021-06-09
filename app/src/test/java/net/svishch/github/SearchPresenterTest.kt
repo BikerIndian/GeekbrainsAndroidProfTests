@@ -1,9 +1,16 @@
-package net.svishch.myfirsttests
+package net.svishch.github
 
+import android.content.Context
+import android.widget.TextView
+import androidx.test.core.app.ActivityScenario
+import androidx.test.core.app.ApplicationProvider
+import junit.framework.TestCase
+import net.svishch.R
 import net.svishch.github.model.SearchResponse
 import net.svishch.github.model.SearchResult
 import net.svishch.github.presenter.search.SearchPresenter
 import net.svishch.github.repository.GitHubRepository
+import net.svishch.github.view.details.DetailsActivity
 import net.svishch.github.view.search.ViewSearchContract
 import org.junit.Assert.*
 import org.junit.Before
@@ -148,5 +155,11 @@ class SearchPresenterTest {
 
         //Убеждаемся, что ответ от сервера обрабатывается корректно
         verify(viewContract, times(1)).displaySearchResults(searchResults, 101)
+    }
+
+    @Test
+    fun onDetach() {
+        presenter.onDetach()
+        assertNull(presenter.viewContract)
     }
 }

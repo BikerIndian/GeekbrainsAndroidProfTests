@@ -4,7 +4,7 @@ import net.svishch.github.view.details.DetailsActivity
 
 
 internal class DetailsPresenter internal constructor(
-    private val viewContract: DetailsActivity,
+    private var viewContract: DetailsActivity?,
     private var count: Int = 0
 ) : PresenterDetailsContract {
 
@@ -14,11 +14,19 @@ internal class DetailsPresenter internal constructor(
 
     override fun onIncrement() {
         count++
-        viewContract.setCount(count)
+        viewContract?.setCount(count)
     }
 
     override fun onDecrement() {
         count--
-        viewContract.setCount(count)
+        viewContract?.setCount(count)
+    }
+
+    override fun onAttach() {
+
+    }
+
+    override fun onDetach() {
+        viewContract = null
     }
 }

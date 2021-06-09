@@ -1,4 +1,4 @@
-package net.svishch.myfirsttests
+package net.svishch.github
 
 import android.content.Context
 import android.os.Build
