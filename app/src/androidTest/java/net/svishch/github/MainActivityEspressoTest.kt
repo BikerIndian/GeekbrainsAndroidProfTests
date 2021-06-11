@@ -56,4 +56,52 @@ class MainActivityEspressoTest {
     fun close() {
         scenario.close()
     }
+
+    @Test
+    fun progressBar_GONE() {
+        checkGONE(R.id.progressBar)
+    }
+
+    @Test
+    fun searchEditText_VISIBLE() {
+        checkVISIBLE(R.id.searchEditText)
+    }
+
+    @Test
+    fun searchEditText_checkText() {
+        onView(withId(R.id.searchEditText)).check(matches(withHint("Enter keyword e.g. android")))
+    }
+
+    @Test
+    fun searchEditText_IsCompletelyDisplayed() {
+        isCompletelyDisplayed(R.id.searchEditText)
+    }
+
+    @Test
+    fun toDetailsActivityButton_VISIBLE() {
+        checkVISIBLE(R.id.toDetailsActivityButton)
+    }
+
+    @Test
+    fun toDetailsActivityButton_IsCompletelyDisplayed() {
+        isCompletelyDisplayed(R.id.toDetailsActivityButton)
+    }
+
+    @Test
+    fun toDetailsActivityButton_checkText() {
+        onView(withId(R.id.toDetailsActivityButton)).check(matches(withText("to details")))
+    }
+
+
+    private fun checkGONE(id: Int) {
+        onView(withId(id)).check(matches(withEffectiveVisibility(Visibility.GONE)))
+    }
+
+    private fun checkVISIBLE(id: Int) {
+        onView(withId(id)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
+    }
+
+    private fun isCompletelyDisplayed(id: Int) {
+        onView(withId(id)).check(matches(isCompletelyDisplayed()))
+    }
 }
