@@ -12,12 +12,10 @@ import net.svishch.github.repository.GitHubApi
 import net.svishch.github.repository.GitHubRepository
 import net.svishch.github.view.details.DetailsActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import net.svishch.BuildConfig
 import net.svishch.R
 import net.svishch.github.model.SearchResult
 import net.svishch.github.presenter.RepositoryContract
 import net.svishch.github.presenter.search.SearchPresenter
-import net.svishch.github.repository.FakeGitHubRepository
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
@@ -68,11 +66,7 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
     }
 
     private fun createRepository(): RepositoryContract {
-        return if (BuildConfig.TYPE == FAKE) {
-            FakeGitHubRepository()
-        } else {
-            GitHubRepository(createRetrofit().create(GitHubApi::class.java))
-        }
+        return GitHubRepository(createRetrofit().create(GitHubApi::class.java))
     }
 
     private fun createRetrofit(): Retrofit {
