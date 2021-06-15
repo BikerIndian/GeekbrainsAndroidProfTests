@@ -19,12 +19,6 @@ class DetailsActivity : AppCompatActivity(), ViewDetailsContract {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
         setUI()
-        presenter.onAttach()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.onDetach()
     }
 
     private fun setUI() {
@@ -40,7 +34,7 @@ class DetailsActivity : AppCompatActivity(), ViewDetailsContract {
     }
 
     private fun setCountText(count: Int) {
-        totalCountTextView.text =
+        totalCountTextView_details.text =
             String.format(Locale.getDefault(), getString(R.string.results_count), count)
     }
 
