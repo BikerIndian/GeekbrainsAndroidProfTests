@@ -107,6 +107,48 @@ class BehaviorTest {
         Assert.assertEquals(changedText.text, "Number of results: 0")
     }
 
+    //Убеждаемся, что DetailsScreen открывается
+    @Test
+    fun test_DetailsScreen() {
+
+        // Кнопка поиска
+        val btnSearch = uiDevice.findObject(By.res(packageName, "searchButton"))
+
+        // Кнопка перехода на Details
+        val toDetails: UiObject2 =
+            uiDevice.findObject(By.res(packageName, "toDetailsActivityButton"))
+
+        //Через uiDevice находим editText
+        val editText = uiDevice.findObject(By.res(packageName, "searchEditText"))
+
+        //Устанавливаем значение
+        editText.text = "UiAutomator"
+        //Отправляем запрос
+        btnSearch.click()
+
+        //Ожидаем  ответ.
+        val changedText =
+            uiDevice.wait(
+                Until.findObject(By.res(packageName, "totalCountTextView")),
+                TIMEOUT
+            )
+        val result = changedText.text.toString()
+
+        // Переходим на Details
+        toDetails.click()
+
+        //Ожидаем конкретного события: появления текстового поля totalCountTextView_details.
+        //Это будет означать, что DetailsScreen открылся и это поле видно на экране.
+        val changedTextDetails =
+            uiDevice.wait(
+                Until.findObject(By.res(packageName, "totalCountTextView_details")),
+                TIMEOUT
+            )
+
+        //Убеждаемся, что поле содержит предполагаемый текст.
+        Assert.assertEquals(result, changedTextDetails.text.toString())
+    }
+
     companion object {
         private const val TIMEOUT = 5000L
     }
