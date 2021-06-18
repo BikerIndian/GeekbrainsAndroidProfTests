@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.TextView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
+import com.geekbrains.tests.DISPLAY_ERROR
 import junit.framework.TestCase
 import net.svishch.R
 import net.svishch.github.model.SearchResponse
@@ -82,7 +83,7 @@ class SearchPresenterTest {
 
         //Убеждаемся, что вызывается верный метод: viewContract.displayError("Response is null or unsuccessful"), и что он вызывается единожды
         verify(viewContract, times(1))
-            .displayError("Response is null or unsuccessful")
+            .displayError(DISPLAY_ERROR)
     }
 
     @Test //Проверим порядок вызова методов viewContract
@@ -95,7 +96,7 @@ class SearchPresenterTest {
         val inOrder = inOrder(viewContract)
         //Прописываем порядок вызова методов
         inOrder.verify(viewContract).displayLoading(false)
-        inOrder.verify(viewContract).displayError("Response is null or unsuccessful")
+        inOrder.verify(viewContract).displayError(DISPLAY_ERROR)
     }
 
     @Test //Проверим пустой ответ сервера
