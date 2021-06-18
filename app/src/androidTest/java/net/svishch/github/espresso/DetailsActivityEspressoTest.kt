@@ -1,4 +1,4 @@
-package net.svishch.github
+package net.svishch.github.espresso
 
 import android.widget.TextView
 import androidx.lifecycle.Lifecycle
