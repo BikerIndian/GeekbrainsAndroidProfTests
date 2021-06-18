@@ -1,17 +1,10 @@
 package net.svishch.github
 
-import android.content.Context
-import android.widget.TextView
-import androidx.test.core.app.ActivityScenario
-import androidx.test.core.app.ApplicationProvider
 import com.geekbrains.tests.DISPLAY_ERROR
-import junit.framework.TestCase
-import net.svishch.R
 import net.svishch.github.model.SearchResponse
 import net.svishch.github.model.SearchResult
 import net.svishch.github.presenter.search.SearchPresenter
 import net.svishch.github.repository.GitHubRepository
-import net.svishch.github.view.details.DetailsActivity
 import net.svishch.github.view.search.ViewSearchContract
 import org.junit.Assert.*
 import org.junit.Before
