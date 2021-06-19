@@ -4,6 +4,7 @@ package net.svishch.github
 import net.svishch.github.model.SearchResponse
 import net.svishch.github.repository.GitHubApi
 import net.svishch.github.repository.GitHubRepository
+import net.svishch.github.repository.RepositoryCallback
 import okhttp3.Request
 import okio.Timeout
 import org.junit.Before
@@ -34,7 +35,7 @@ class GitHubRepositoryTest {
         val call = mock(Call::class.java) as Call<SearchResponse?>
 
         `when`(gitHubApi.searchGithub(searchQuery)).thenReturn(call)
-        repository.searchGithub(searchQuery, mock(GitHubRepository.GitHubRepositoryCallback::class.java))
+        repository.searchGithub(searchQuery, mock(RepositoryCallback::class.java))
         verify(gitHubApi, times(1)).searchGithub(searchQuery)
     }
 
@@ -42,7 +43,7 @@ class GitHubRepositoryTest {
     fun searchGithub_TestCallback() {
         val searchQuery = "some query"
         val response = mock(Response::class.java) as Response<SearchResponse?>
-        val gitHubRepositoryCallBack = mock(GitHubRepository.GitHubRepositoryCallback::class.java)
+        val gitHubRepositoryCallBack = mock(RepositoryCallback::class.java)
 
         val call = object : Call<SearchResponse?> {
             override fun enqueue(callback: Callback<SearchResponse?>) {
@@ -90,7 +91,7 @@ class GitHubRepositoryTest {
         val searchQuery = "some query"
         val call = mock(Call::class.java) as Call<SearchResponse?>
         val callBack = mock(Callback::class.java) as Callback<SearchResponse?>
-        val gitHubRepositoryCallBack = mock(GitHubRepository.GitHubRepositoryCallback::class.java)
+        val gitHubRepositoryCallBack = mock(RepositoryCallback::class.java)
         val response = mock(Response::class.java) as Response<SearchResponse?>
 
         `when`(gitHubApi.searchGithub(searchQuery)).thenReturn(call)
@@ -103,6 +104,5 @@ class GitHubRepositoryTest {
 
         repository.searchGithub(searchQuery, gitHubRepositoryCallBack)
 
-//        verify(gitHubRepositoryCallBack, times(1)).handleGitHubResponse(response)
     }
 }

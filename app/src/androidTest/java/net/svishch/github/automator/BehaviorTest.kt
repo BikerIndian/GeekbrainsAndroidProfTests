@@ -10,6 +10,7 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import androidx.test.uiautomator.Until
+import com.geekbrains.tests.ID_SEARCH_EDIT_TEXT
 
 import org.junit.Assert
 import org.junit.Before
@@ -51,7 +52,7 @@ class BehaviorTest {
     @Test
     fun test_MainActivityIsStarted() {
         //Через uiDevice находим editText
-        val editText = uiDevice.findObject(By.res(packageName, "searchEditText"))
+        val editText = uiDevice.findObject(By.res(packageName, ID_SEARCH_EDIT_TEXT))
         //Проверяем на null
         Assert.assertNotNull(editText)
     }
@@ -61,7 +62,7 @@ class BehaviorTest {
     fun test_SearchIsPositive() {
         val btnSearch = uiDevice.findObject(By.res(packageName, "searchButton"))
         //Через uiDevice находим editText
-        val editText = uiDevice.findObject(By.res(packageName, "searchEditText"))
+        val editText = uiDevice.findObject(By.res(packageName, ID_SEARCH_EDIT_TEXT))
         //Устанавливаем значение
         editText.text = "UiAutomator"
         //Отправляем запрос
@@ -119,7 +120,7 @@ class BehaviorTest {
             uiDevice.findObject(By.res(packageName, "toDetailsActivityButton"))
 
         //Через uiDevice находим editText
-        val editText = uiDevice.findObject(By.res(packageName, "searchEditText"))
+        val editText = uiDevice.findObject(By.res(packageName, ID_SEARCH_EDIT_TEXT))
 
         //Устанавливаем значение
         editText.text = "UiAutomator"

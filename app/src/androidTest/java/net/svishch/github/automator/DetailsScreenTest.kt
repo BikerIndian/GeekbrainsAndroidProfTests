@@ -10,6 +10,8 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import androidx.test.uiautomator.Until
+import com.geekbrains.tests.TEST_NUMBER_OF_RESULTS_MINUS_1
+import com.geekbrains.tests.TEST_NUMBER_OF_RESULTS_PLUS_1
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -63,7 +65,7 @@ class DetailsScreenTest {
         // Кнопка increment
         val btnIncrement = getObjectId("incrementButton")
         btnIncrement.click()
-        Assert.assertEquals(changedTextDetails.text.toString(), "Number of results: 1")
+        Assert.assertEquals(changedTextDetails.text.toString(), TEST_NUMBER_OF_RESULTS_PLUS_1)
 
     }
 
@@ -72,7 +74,7 @@ class DetailsScreenTest {
         // Кнопка decrement
         val btnDecrement =  getObjectId("decrementButton")
         btnDecrement.click()
-        Assert.assertEquals(changedTextDetails.text.toString(), "Number of results: -1")
+        Assert.assertEquals(changedTextDetails.text.toString(), TEST_NUMBER_OF_RESULTS_MINUS_1)
 
     }
 
